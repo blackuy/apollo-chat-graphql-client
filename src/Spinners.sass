@@ -1,0 +1,51 @@
+@import './Variables.sass'
+
+.spinner-react 
+
+  .circular
+    animation: rotateReact 2s linear infinite
+    position: relative
+
+  .path 
+    stroke-dasharray: 1,200
+    stroke-dashoffset: 0
+    animation: dashReact 1.5s ease-in-out infinite, colorReact 6s ease-in-out infinite    
+    stroke-linecap: round
+    &.white
+      animation: dashReact 1.5s ease-in-out infinite, colorReactWhite 6s ease-in-out infinite    
+
+@keyframes rotateReact
+  100%
+    transform: rotate(360deg)
+
+@keyframes dashReact
+  0%
+    stroke-dasharray: 1,200
+    stroke-dashoffset: 0
+  50%
+    stroke-dasharray: 89,200
+    stroke-dashoffset: -35
+  100%
+    stroke-dasharray: 89,200
+    stroke-dashoffset: -124
+
+@keyframes colorReact
+  100%, 0%
+    stroke: $blue
+  40%
+    stroke: $blue
+  66%
+    stroke: $blue
+  80%, 90%
+    stroke: $blue
+  
+
+@keyframes colorReactWhite
+  100%, 0%
+    stroke: white
+  40%
+    stroke: white
+  66%
+    stroke: white
+  80%, 90%
+    stroke: white

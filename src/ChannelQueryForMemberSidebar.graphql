@@ -1,0 +1,11 @@
+#import "./ChannelFragment.graphql"
+#import "./UserFragment.graphql"
+
+query ChannelQuery($channelID: ID!) {
+  channel(channelID: $channelID) {
+    ...ChannelFragment
+    participants {
+      ...UserFragment
+    }
+  }
+}

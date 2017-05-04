@@ -1,0 +1,8 @@
+#import "./ChannelFragment.graphql"
+
+query ChannelsQuery {
+  channels {
+    ...ChannelFragment
+    participantCount
+  }
+}

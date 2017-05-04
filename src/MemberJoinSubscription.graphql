@@ -1,0 +1,9 @@
+#import "./UserFragment.graphql"
+
+subscription OnMemberSubscription(
+  $channelID: ID!
+) {
+  onMemberJoin(channelID: $channelID) {
+    ...UserFragment
+  }
+}

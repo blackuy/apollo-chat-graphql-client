@@ -1,0 +1,104 @@
+@import './Variables.sass'
+
+@keyframes fadeInLogin
+  0%
+    transform: scale(0.93)
+    opacity: 0.0
+  100%
+    transform: scale(1.0)
+    opacity: 1.0
+
+
+.login-form.widget
+  align-items: center
+  justify-content: center
+
+  .content
+    background-color: white
+    min-width: 350px
+    padding: 55px
+    border: 10px solid rgba(0,0,0,.04)
+    animation-name: fadeInLogin
+    animation-duration: .3s
+    animation-timing-function ease-out
+    animation-count: 1
+    animation-direction: forward
+    animation-fill-mode: both
+      
+    header
+      margin-bottom: 25px
+
+      h1
+        line-height: 1
+        margin: 0
+        font-size: 4em
+        margin-bottom: 15px
+        font-weight: 200
+        color: blue
+
+      p
+        font-size: 0.875em
+        letter-spacing: .1em
+        text-transform: uppercase
+
+    
+    .error
+      color: red
+      margin-top: 10px
+      margin-bottom: 20px
+
+    input, select, option, button, textarea
+      padding: 20px 25px
+      // border: 0
+      border: 1px solid #ddd
+      outline: 0
+      border-radius: 0
+      background-color: white
+      font-size: 1.25em
+      color: $blue
+
+    .channels
+      select
+        padding-right: 40px
+        background-image: url("data:image/svg+xml;utf8,<svg fill='#{$blue}' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>")
+        background-repeat: no-repeat
+        background-position-x: 95%
+        background-position-y: 50%
+      input
+        width: 100%
+        border-left: 0
+
+    input, textarea
+      padding-right: 0
+
+    input, textarea, select
+      transition: all .15s ease
+      &:focus
+        background-color: rgba(0,0,0,.03)
+        box-shadow: 0 0 0 2px rgba(0,0,0,.02)
+
+    input[type='submit'], 
+    button
+      background-color: $blue
+      border-bottom: 0
+      color: white
+      cursor: pointer
+      transition: all .15s ease-in-out
+      .contents
+        text-align: center
+        align-items: center
+        justify-content: center
+        display: flex
+      &:disabled
+        // opacity: .5
+        background-color:  rgba(0,0,0,.1)
+        color: rgba(0,0,0,.2)
+        cursor: auto
+
+      &:hover:not(:disabled),
+      &:focus:not(:disabled),
+        background-color: lighten($blue, 10%)
+
+    .field
+      & + .field
+        margin-top: 30px

@@ -1,0 +1,32 @@
+@import './Variables.sass'
+
+.new-message-field.widget
+  position: relative
+  z-index: 10
+  background: rgba(255,255,255, .95)
+
+  textarea
+    background: transparent
+    // min-height: 65px
+    max-height: 200px
+    overflow-y: auto
+    box-shadow: none
+    resize: none !important
+    outline: 0
+    margin: 0
+    border: 0
+    box-shadow: none
+    padding: 20px 20px
+    line-height: 1.4
+    border: 0
+    display: block
+    width: 100%
+    border-top: 1px solid $border-color
+
+    &::placeholder
+      color: rgba(black, .4)
+      letter-spacing: 0
+
+    &:active,
+    &:focus
+      outline: 0

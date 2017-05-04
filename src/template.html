@@ -2,12 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>React App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apollo GraphQL Chat with Subscriptions DEMO [by Gaston Morixe]</title>
+  
+  <link rel="Stylesheet" href="//maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
+  
+  <style>
+    * { margin: 0; padding:  0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    #app {
+      width: 100%;
+      height: 100%;      
+    }
+    .spinner {
+      justify-content:  center;
+      align-items:  center;
+      display:  flex;
+      flex:  1;
+      width: 100%;      
+      height: 100%;      
+    }
+    .spinner .loader {
+      width: 100px;
+      height: 100px;
+    }
+
+    .spinner .circular {
+      animation: rotate 2s linear infinite;
+      height: 100px;
+      position: relative;
+      width: 100px;
+    }
+
+    .spinner .path {
+      stroke-dasharray: 1,200;
+      stroke-dashoffset: 0;
+      animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+      stroke-linecap: round;
+    }
+
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 1,200;
+        stroke-dashoffset: 0;
+      }
+
+      50% {
+        stroke-dasharray: 89,200;
+        stroke-dashoffset: -35;
+      }
+
+      100% {
+        stroke-dasharray: 89,200;
+        stroke-dashoffset: -124;
+      }
+    }
+
+    @keyframes color {
+      100%, 0% {
+        stroke: #144AEB;
+      }
+
+      40% {
+        stroke: #144AEB;
+      }
+
+      66% {
+        stroke: #144AEB;
+      }
+
+      80%, 90% {
+        stroke: #144AEB;
+      }
+    }
+  </style>  
 </head>
-<body>
-  <div class="container">
-    <div id="app">Loading...</div>
+<body class='flex flex-fill flex-column'>
+
+  <div id="app" class='flex flex-fill flex-column'>
+    <div class='spinner'>
+      <div class='loader'>
+        <svg class='circular'>
+          <circle class='path' cx='50' cy='50' r='20' fill='none' stroke-width='2' stroke-miterlimit='10' />
+        </svg>
+      </div>
+    </div>
   </div>
 </body>
 </html>

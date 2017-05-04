@@ -1,0 +1,15 @@
+#import "./MessageFragment.graphql"
+
+mutation NewMessageMutation(
+  $channelID: ID!,
+  $userID: ID!,
+  $text: String!
+) {
+  messageNew(
+    channelID: $channelID,
+    userID: $userID,
+    text: $text
+  ) {
+    ...MessageFragment
+  }
+}

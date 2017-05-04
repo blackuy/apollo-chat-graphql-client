@@ -1,0 +1,9 @@
+#import "./MessageFragment.graphql"
+
+subscription OnMessageAddedSubscription(
+  $channelID: ID!
+) {
+  onMessageAdded(channelID: $channelID) {
+    ...MessageFragment
+  }
+}

@@ -1,15 +1,15 @@
-var webpack = require('webpack');
-var path = require('path');
-var loaders = require('./webpack.loaders');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack')
+var path = require('path')
+var loaders = require('./webpack.loaders')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var WebpackCleanupPlugin = require('webpack-cleanup-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 loaders.push({
-  test: /\.scss$/,
-  loader: ExtractTextPlugin.extract({fallback: 'style-loader', use : 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded'}),
+  test: /\.(scss|sass)$/,
+  loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded'}),
   exclude: ['node_modules']
-});
+})
 
 module.exports = {
   entry: [
@@ -17,8 +17,8 @@ module.exports = {
     './styles/index.scss'
   ],
   output: {
-    publicPath: './',		
-    path: path.join(__dirname, 'public'),
+    publicPath: './',
+    path: path.join(__dirname, 'dist'),
     filename: '[chunkhash].js'
   },
   resolve: {
@@ -29,6 +29,7 @@ module.exports = {
   },
   plugins: [
     new WebpackCleanupPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
@@ -51,8 +52,8 @@ module.exports = {
       template: './src/template.html',
       files: {
         css: ['style.css'],
-        js: ['bundle.js'],
+        js: ['bundle.js']
       }
     })
   ]
-};
+}

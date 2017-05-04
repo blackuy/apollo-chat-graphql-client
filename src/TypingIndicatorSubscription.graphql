@@ -1,0 +1,9 @@
+#import "./UserFragment.graphql"
+
+subscription OnTypingIndicatorChangedSubscription(
+  $channelID: ID!
+) {
+  onTypingIndicatorChanged(channelID: $channelID) {
+    ...UserFragment
+  }
+}

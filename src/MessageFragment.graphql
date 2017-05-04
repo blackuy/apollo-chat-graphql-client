@@ -1,0 +1,10 @@
+#import "./UserFragment.graphql"
+
+fragment MessageFragment on Message {
+  id
+  createdBy {
+    ...UserFragment
+  }
+  createdAt
+  text
+}

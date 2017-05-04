@@ -1,0 +1,22 @@
+@import './Variables.sass'
+
+.header.widget
+  padding: 15px
+  padding-left: 30px
+  padding-right: 30px
+  border-bottom: 1px solid $border-color
+
+
+  .connection-state-bubble
+    width: 10px
+    height: 10px
+    border-radius: 50%
+    background: #F40B21
+    
+  &.connection-connected
+    .connection-state-bubble
+      background: #3CF40B
+      
+  &.connection-reconnecting
+    .connection-state-bubble
+      background: #F4E402

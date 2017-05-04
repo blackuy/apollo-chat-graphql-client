@@ -1,0 +1,9 @@
+#import "./MessageFragment.graphql"
+
+query MessagesForChannelQuery(
+  $channelID: ID!
+) {
+  messagesForChannel(channelID: $channelID) {
+    ...MessageFragment
+  }
+}

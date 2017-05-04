@@ -1,14 +1,27 @@
-import React from 'react';
-import '../styles/index.scss';
+import React from 'react'
+import './App.sass'
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>It Works!</h1>
-        <p>This React project just works including <span className="redBg">module</span> local styles.</p>
-        <p>Enjoy!</p>
-      </div>
-    )
-  }
+import Chat from './Chat'
+import LoginForm from './LoginForm'
+
+export default ({ logout, loggedIn, myUser, onLogin, channel, networkStatus }) => {
+  return (
+    <div className='app widget flex flex-column flex-fill'>
+      {
+        loggedIn &&
+        <Chat
+          logout={logout}
+          networkStatus={networkStatus}
+          myUser={myUser}
+          channel={channel}
+          />
+      }
+      {
+        !loggedIn &&
+        <LoginForm
+          onLogin={onLogin}
+          />
+      }
+    </div>
+  )
 }

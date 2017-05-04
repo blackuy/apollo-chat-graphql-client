@@ -1,0 +1,9 @@
+mutation TypingMutation(
+  $channelID: ID!,
+  $userID: ID!
+) {
+  typing(
+    channelID: $channelID,
+    userID: $userID
+  )
+}

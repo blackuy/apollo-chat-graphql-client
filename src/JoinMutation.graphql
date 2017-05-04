@@ -1,0 +1,19 @@
+#import "./UserFragment.graphql"
+#import "./ChannelFragment.graphql"
+
+mutation JoinMutation(
+  $channelName: String!,
+  $username: String!
+) {
+  join(
+    channelName: $channelName,
+    username: $username
+  ) {
+    user {
+      ...UserFragment
+    }
+    channel {
+      ...ChannelFragment
+    }
+  }
+}
