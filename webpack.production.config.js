@@ -7,7 +7,10 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 loaders.push({
   test: /\.(scss|sass)$/,
-  loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded'}),
+  loader: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded'
+  }),
   exclude: ['node_modules']
 })
 
@@ -27,7 +30,7 @@ module.exports = {
   target: 'web',
   plugins: [
     new WebpackCleanupPlugin(
-      { exclude: ['CNAME'] }
+      { exclude: ['CNAME', 'CNAME.example'] }
     ),
     new webpack.NamedModulesPlugin(),
     new webpack.EnvironmentPlugin([
@@ -45,11 +48,15 @@ module.exports = {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new ExtractTextPlugin({
-      filename: 'style.css',
+      filename: '[chunkhash].css',
       allChunks: true
     }),
     new HtmlWebpackPlugin({
-      template: './src/template.html',
+      template: './src/template.ejs',
+      googleAnalytics: {
+        trackingId: process.env.GA,
+        pageViewOnLoad: true
+      },
       files: {
         css: ['style.css'],
         js: ['bundle.js']
