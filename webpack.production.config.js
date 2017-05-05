@@ -12,10 +12,7 @@ loaders.push({
 })
 
 module.exports = {
-  entry: [
-    './src/index.jsx',
-    './src/App.sass'
-  ],
+  entry: ['./src/index.jsx'],
   output: {
     publicPath: './',
     path: path.join(__dirname, 'dist'),
@@ -27,8 +24,11 @@ module.exports = {
   module: {
     loaders
   },
+  target: 'web',
   plugins: [
-    new WebpackCleanupPlugin('dist'),
+    new WebpackCleanupPlugin(
+      { exclude: ['CNAME'] }
+    ),
     new webpack.NamedModulesPlugin(),
     new webpack.EnvironmentPlugin([
       'APOLLO_HTTP_ENDPOINT',
