@@ -14,7 +14,7 @@ loaders.push({
 module.exports = {
   entry: [
     './src/index.jsx',
-    './styles/index.scss'
+    './src/App.sass'
   ],
   output: {
     publicPath: './',
@@ -28,13 +28,13 @@ module.exports = {
     loaders
   },
   plugins: [
-    new WebpackCleanupPlugin(),
+    new WebpackCleanupPlugin('dist'),
     new webpack.NamedModulesPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
+    new webpack.EnvironmentPlugin([
+      'APOLLO_HTTP_ENDPOINT',
+      'APOLLO_WS_ENDPOINT',
+      'NODE_ENV'
+    ]),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,

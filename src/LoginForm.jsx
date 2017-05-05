@@ -24,7 +24,8 @@ import JoinMutation from './JoinMutation.graphql'
 @graphql(ChannelsQuery, {
   name: 'channelsQuery',
   options: () => ({
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network'
   })
 })
 export default class extends Component {
@@ -48,6 +49,19 @@ export default class extends Component {
   get channelSelectValue () {
     return this.state.channelNameSelected
       // (this.channels && this.channels[0] && this.channels[0].name);
+  }
+
+  get networkStatus () {
+    return this.props.networkStatus
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.channelsQuery.error) {
+      if (this.props.networkStatus !== 'connected' &&
+        nextProps.networkStatus === 'connected') {
+        this.props.channelsQuery.refetch()
+      }
+    }
   }
 
   onSubmit = (ev) => {
@@ -89,6 +103,9 @@ export default class extends Component {
   }
 
   get submitDisabled () {
+    if (this.props.channelsQuery.error) {
+      return true
+    }
     if (this.state.sending) {
       return true
     }
@@ -96,7 +113,14 @@ export default class extends Component {
       (this.finalChannelName && this.finalChannelName.length > 3))
   }
 
+  showErrors () {
+    if (this.props.channelsQuery.error) {
+      console.error('Login Errors', this.props.channelsQuery.error)
+    }
+  }
+
   render () {
+    this.showErrors()
     return (
       <div className='login-form widget flex flex-column flex-fill'>
         <div className='content flex flex-column'>
@@ -105,6 +129,7 @@ export default class extends Component {
             <p>GraphQL with Subscriptions</p>
           </header>
           {this.state.error && <div className='error'>{this.state.error}</div>}
+          {this.networkStatus === 'reconnecting' && <div className='error'>Can't connect to the server. Reconnecting...</div>}
           <div className='flex flex-column field username'>
             <input
               autoFocus
@@ -115,9 +140,13 @@ export default class extends Component {
               placeholder='Username' />
           </div>
           <div className='flex flex-row field channels'>
-            <select className='flex' onChange={this.onChannelSelectChange} value={this.channelSelectValue || false}>
+            <select
+              disabled={!!this.props.channelsQuery.error}
+              className='flex'
+              onChange={this.onChannelSelectChange}
+              value={this.channelSelectValue || false}>
               <option disabled value={false}>Select Channel</option>
-              {this.channels.map(c => <option key={c.id} value={c.name}>{c.name} ({c.participantCount})</option>)}
+              {this.channels.map(c => <option key={c.id} value={c.name}>{c.name} {c.participantCount > 0 ? `(${c.participantCount})` : ''}</option>)}
             </select>
             <input
               ref={el => { this.channelNameDOM = el }}
@@ -127,7 +156,9 @@ export default class extends Component {
               placeholder='or Create Channel' />
           </div>
           <div className='flex flex-column field submit'>
-            <button onClick={this.onSubmit} disabled={this.submitDisabled}>
+            <button
+              onClick={this.onSubmit}
+              disabled={this.submitDisabled}>
               <div className='contents'>
                 {!this.state.sending && <span>Login</span>}
                 {this.state.sending && <Spinners.SnakeCircle radius={15} />}

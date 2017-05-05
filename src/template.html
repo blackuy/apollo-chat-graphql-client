@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Apollo GraphQL Chat with Subscriptions DEMO [by Gaston Morixe]</title>
+  <title>Apollo Chat - GraphQL with Subscriptions</title>
   
   <link rel="Stylesheet" href="//maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
   
@@ -15,10 +15,41 @@
     body {
       width: 100%;
       height: 100%;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+      font-size: 16px;
+      -webkit-appearance: none;
+      appearance: none;
+      font-weight: 300;
     }
+
     #app {
-      width: 100%;
-      height: 100%;      
+      flex: 1;
+      display: flex;
+      flex-direction: column;      
+    }
+    #footer {
+      flex-direction: column;
+      display: flex;
+      background-color: rgba(0,0,0,.03);
+      color: #858988;
+      font-size:  .75em;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 0;
+    }
+    #footer a:link, #footer a:visited  {
+      color: #858988;
+      text-decoration: none;
+    }
+    #footer a:hover {
+      color: #144AEB;
+      text-decoration: none;
+    }
+    .hidden {
+      display: none;
     }
     .spinner {
       justify-content:  center;
@@ -90,7 +121,6 @@
   </style>  
 </head>
 <body class='flex flex-fill flex-column'>
-
   <div id="app" class='flex flex-fill flex-column'>
     <div class='spinner'>
       <div class='loader'>
@@ -100,5 +130,9 @@
       </div>
     </div>
   </div>
+  <footer id="footer">
+    <h1 class='hidden'>Apollo Chat - GraphQL with Subscriptions</h1>
+    <p>with ♥︎ by <a href="http://github.com/gaston23/apollo-chat-graphql-client">Gaston Morixe</a></h1>
+  </footer>
 </body>
 </html>

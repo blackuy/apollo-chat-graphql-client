@@ -11,8 +11,8 @@ const MemberList = ({ members, loading }) => {
   return (
     <div className={`members flex-column flex flex-fill padding`}>
       <h2>Members</h2>
-      { loading && <Spinners.SnakeCircle /> }
       { members && members.map(m => <div key={m.id} className='member'>{m.username}</div>) }
+      { loading && <Spinners.SnakeCircle /> }
     </div>
   )
 }
@@ -71,7 +71,13 @@ const MyAccount = ({ myUser }) => {
 export default class extends Component {
   get members () {
     const { membersQuery } = this.props
-    return membersQuery && membersQuery.channel && membersQuery.channel.participants
+    let members = (membersQuery &&
+      membersQuery.channel &&
+      membersQuery.channel.participants) || []
+    if (members.filter(m => m.id === this.myUser.id).length === 0) {
+      members = [this.myUser, ...members]
+    }
+    return members
   }
 
   get myUser () {

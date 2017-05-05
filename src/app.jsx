@@ -19,6 +19,7 @@ export default ({ logout, loggedIn, myUser, onLogin, channel, networkStatus }) =
       {
         !loggedIn &&
         <LoginForm
+          networkStatus={networkStatus}
           onLogin={onLogin}
           />
       }

@@ -15,26 +15,25 @@ import AppState from './AppState.jsx'
 //
 // Apollo
 
-const APOLLO_ENPOINT = `http://mac.gastonmorixe.com:3010/graphql${window.location.search}`
+const APOLLO_HTTP_ENDPOINT = `${process.env.APOLLO_HTTP_ENDPOINT}${window.location.search}`
 
 const networkInterface = createBatchingNetworkInterface({
-  uri: APOLLO_ENPOINT,
+  uri: APOLLO_HTTP_ENDPOINT,
   batchInterval: 10
 })
 
 //
 // Subscriptions
 
-const SUBSCRIPTIONS_ENDPOINT = 'ws://mac.gastonmorixe.com:3011/'
+const APOLLO_WS_ENDPOINT = `${process.env.APOLLO_WS_ENDPOINT}${window.location.search}`
 
-export const wsClient = new SubscriptionClient(SUBSCRIPTIONS_ENDPOINT, {
-  reconnect: true,
-  connectionCallback: (error) => {
-    console.log('Subscriptions callback 🔥', { error })
-  }
-})
-
-console.log({wsClient})
+export const wsClient = new SubscriptionClient(
+  APOLLO_WS_ENDPOINT, {
+    reconnect: true,
+    connectionCallback: (error) => {
+      console.log('Subscriptions callback 🔥', { error })
+    }
+  })
 
 const MyAppState = new AppState()
 
@@ -85,6 +84,7 @@ render(Root(App), document.querySelector('#app'))
 
 if (module && module.hot) {
   module.hot.accept('./App.jsx', () => {
+    console.log('---- HOT RELOADING 🤖 ---')
     const App = require('./App.jsx').default
     render(
       Root(App),

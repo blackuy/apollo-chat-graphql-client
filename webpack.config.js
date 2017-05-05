@@ -5,9 +5,10 @@ var loaders = require('./webpack.loaders')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var DashboardPlugin = require('webpack-dashboard/plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var Dotenv = require('dotenv-webpack')
 
 const HOST = process.env.HOST || '127.0.0.1'
-const PORT = process.env.PORT || '8888'
+const PORT = process.env.PORT || '8889'
 
 loaders.push({
   test: /\.(scss|sass)$/,
@@ -36,7 +37,7 @@ module.exports = {
     disableHostCheck: true,
     contentBase: './public',
     // do not print bundle build stats
-    noInfo: true,
+    noInfo: false,
     // enable HMR
     hot: true,
     // embed the webpack-dev-server runtime into the bundle
@@ -44,9 +45,14 @@ module.exports = {
     // serve index.html in place of 404 responses to allow HTML5 history
     historyApiFallback: true,
     port: PORT,
-    host: HOST
+    host: HOST,
+    watchContentBase: true
   },
   plugins: [
+    new Dotenv({
+      path: './.env.dev',
+      safe: true
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
