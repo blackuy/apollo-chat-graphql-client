@@ -1,0 +1,466 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+body, input, select, option, textarea, button {
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-size: 16px;
+  -webkit-appearance: none;
+  appearance: none;
+  font-weight: 300;
+}
+
+body .flex {
+  display: flex;
+}
+
+body .flex-column {
+  flex-direction: column;
+}
+
+body .flex-row {
+  flex-direction: row;
+}
+
+body .flex-fill {
+  flex: 1;
+}
+
+body a, body a:link {
+  text-decoration: none;
+}
+
+body a.black, body a.black:link {
+  color: black;
+}
+
+body a.black:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+body a.black:active {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+body .padding {
+  padding: 30px;
+}
+
+body .flex-center-j {
+  justify-content: center;
+}
+
+body .flex-center-a {
+  align-items: center;
+}
+
+body .space-h {
+  width: 30px;
+}
+
+body .space-h.mini {
+  width: 15px;
+}
+
+body .space-h.mini-mini {
+  width: 5px;
+}
+@keyframes turnBlue {
+  100% {
+    background-color: #144AEB;
+    color: white;
+    box-shadow: inset 0 0 0 1px transparent;
+  }
+}
+
+@keyframes pendingMessage {
+  0% {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.message-list {
+  overflow-x: auto;
+  overflow-y: scroll;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.message-list .messages {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.message-list .message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.message-list .message + .message:not(.same) {
+  margin-top: 15px;
+}
+
+.message-list .message + .message {
+  margin-top: 2px;
+}
+
+.message-list .message.same .header {
+  display: none;
+}
+
+.message-list .message .footer {
+  margin-top: 1px;
+}
+
+.message-list .message .footer .date {
+  font-size: .75em;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.message-list .message .header {
+  line-height: 1;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.message-list .message .text {
+  background: rgba(0, 2, 4, 0.06);
+  padding: 6px 11px 5px 11px;
+  line-height: 1.5;
+  color: black;
+  border-radius: 4px;
+  transition: transform .2s ease-in-out;
+}
+
+.message-list .message.mine {
+  align-items: flex-end;
+}
+
+.message-list .message.mine .text {
+  background: #144AEB;
+  color: white;
+}
+
+.message-list .message.mine.live:last-child:not(.pending) .text {
+  box-shadow: inset 0 0 0 1px #144AEB;
+  color: black;
+  background-color: white;
+  animation-name: turnBlue;
+  animation-duration: .3s;
+  animation-direction: forward;
+  animation-fill-mode: both;
+}
+
+.message-list .message.pending .text {
+  background: rgba(0, 0, 0, 0.01);
+  color: rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+  animation-name: pendingMessage;
+  animation-duration: .5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.message-list .message.failed .text {
+  background: #EB141C;
+}
+
+.live {
+  border: 10px red solid !important;
+}
+.spinner-react .circular {
+  animation: rotateReact 2s linear infinite;
+  position: relative;
+}
+
+.spinner-react .path {
+  stroke-dasharray: 1,200;
+  stroke-dashoffset: 0;
+  animation: dashReact 1.5s ease-in-out infinite, colorReact 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+.spinner-react .path.white {
+  animation: dashReact 1.5s ease-in-out infinite, colorReactWhite 6s ease-in-out infinite;
+}
+
+@keyframes rotateReact {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dashReact {
+  0% {
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -124;
+  }
+}
+
+@keyframes colorReact {
+  100%, 0% {
+    stroke: #144AEB;
+  }
+  40% {
+    stroke: #144AEB;
+  }
+  66% {
+    stroke: #144AEB;
+  }
+  80%, 90% {
+    stroke: #144AEB;
+  }
+}
+
+@keyframes colorReactWhite {
+  100%, 0% {
+    stroke: white;
+  }
+  40% {
+    stroke: white;
+  }
+  66% {
+    stroke: white;
+  }
+  80%, 90% {
+    stroke: white;
+  }
+}
+.new-message-field.widget {
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.new-message-field.widget textarea {
+  background: transparent;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: none;
+  resize: none !important;
+  outline: 0;
+  margin: 0;
+  border: 0;
+  box-shadow: none;
+  padding: 20px 20px;
+  line-height: 1.4;
+  border: 0;
+  display: block;
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.new-message-field.widget textarea::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 0;
+}
+
+.new-message-field.widget textarea:active, .new-message-field.widget textarea:focus {
+  outline: 0;
+}
+.typing-indicator {
+  background: rgba(239, 246, 245, 0.6);
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.typing-indicator .participant {
+  font-weight: 400;
+}
+.header.widget {
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.header.widget .connection-state-bubble {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #F40B21;
+}
+
+.header.widget.connection-connected .connection-state-bubble {
+  background: #3CF40B;
+}
+
+.header.widget.connection-reconnecting .connection-state-bubble {
+  background: #F4E402;
+}
+.member-list.widget {
+  background-color: #EDF4F4;
+}
+
+.member-list.widget h2 {
+  margin-bottom: .5em;
+}
+
+.member-list.widget .member + .member {
+  margin-top: .2em;
+}
+
+.member-list.widget .members {
+  overflow-y: auto;
+}
+
+.member-list.widget .my-account {
+  padding-left: 30px;
+  padding-right: 30px;
+  height: 63px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+@keyframes fadeInLogin {
+  0% {
+    transform: scale(0.93);
+    opacity: 0.0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1.0;
+  }
+}
+
+.login-form.widget {
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form.widget .content {
+  background-color: rgba(0, 0, 0, 0.03);
+  min-width: 350px;
+  padding: 55px;
+  animation-name: fadeInLogin;
+  animation-duration: .3s;
+  animation-count: 1;
+  animation-direction: forward;
+  animation-fill-mode: both;
+}
+
+.login-form.widget .content header {
+  margin-bottom: 25px;
+}
+
+.login-form.widget .content header h1 {
+  line-height: 1;
+  margin: 0;
+  font-size: 4em;
+  margin-bottom: 15px;
+  font-weight: 200;
+  color: blue;
+}
+
+.login-form.widget .content header p {
+  font-size: 0.875em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.login-form.widget .content .error {
+  color: red;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.login-form.widget .content input, .login-form.widget .content select, .login-form.widget .content option, .login-form.widget .content button, .login-form.widget .content textarea {
+  padding: 20px 25px;
+  border: 1px solid #ddd;
+  outline: 0;
+  border-radius: 0;
+  background-color: white;
+  font-size: 1.25em;
+  color: #144AEB;
+}
+
+.login-form.widget .content .channels select {
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='#144AEB' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: 50%;
+}
+
+.login-form.widget .content .channels input {
+  width: 100%;
+  border-left: 0;
+}
+
+.login-form.widget .content input, .login-form.widget .content textarea {
+  padding-right: 0;
+}
+
+.login-form.widget .content input, .login-form.widget .content textarea, .login-form.widget .content select {
+  transition: all .15s ease;
+}
+
+.login-form.widget .content input:focus, .login-form.widget .content textarea:focus, .login-form.widget .content select:focus {
+  box-shadow: 0 0 0 2px rgba(20, 74, 235, 0.1);
+}
+
+.login-form.widget .content input[type='submit'],
+.login-form.widget .content button {
+  background-color: #144AEB;
+  border-bottom: 0;
+  color: white;
+  cursor: pointer;
+  transition: all .15s ease-in-out;
+}
+
+.login-form.widget .content input[type='submit'] .contents,
+.login-form.widget .content button .contents {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.login-form.widget .content input[type='submit']:disabled,
+.login-form.widget .content button:disabled {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.2);
+  cursor: auto;
+}
+
+.login-form.widget .content input[type='submit']:hover:not(:disabled), .login-form.widget .content input[type='submit']:focus:not(:disabled),
+.login-form.widget .content button:hover:not(:disabled),
+.login-form.widget .content button:focus:not(:disabled) {
+  background-color: #436eef;
+}
+
+.login-form.widget .content .field + .field {
+  margin-top: 30px;
+}
