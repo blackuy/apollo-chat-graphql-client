@@ -1,5 +1,7 @@
 # Apollo Chat GraphQL (client)
 
+[Server Code: gaston23/apollo-chat-graphql-server](http://github.com/gaston23/apollo-chat-graphql-server)
+
 ### What's in it?
 TODO
 
