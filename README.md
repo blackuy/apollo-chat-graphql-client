@@ -15,3 +15,9 @@ TODO
 
 ### Contribute
 Please contribute to the project if you know how to make it better, including this README :)
+
+### Creators
+
+Gaston Morixe [gaston@black.uy](mailto:gaston@black.uy)
+
+[Black Experiments](http://black.uy)
