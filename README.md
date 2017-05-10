@@ -18,6 +18,5 @@ Please contribute to the project if you know how to make it better, including th
 
 ### Creators
 
-Gaston Morixe [gaston@black.uy](mailto:gaston@black.uy)
-
-[Black Experiments](http://black.uy)
+Gaston Morixe [gaston@black.uy](mailto:gaston@black.uy)  
+[Black Experiments black.uy](http://black.uy)
